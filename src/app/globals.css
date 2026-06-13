@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@theme {
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-light: rgba(0, 0, 0, 0.03);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-border-light: rgba(0, 0, 0, 0.08);
+  --color-accent: #8B5CF6;
+  --color-accent-2: #06B6D4;
+  --color-accent-3: #F59E0B;
+  --color-surface-dark: #0F0F14;
+  --color-surface-dark-2: #1A1A24;
+  --color-surface-light: #FAFBFC;
+  --color-surface-light-2: #F0F2F5;
+  --color-text-dark: #E4E4E7;
+  --color-text-light: #18181B;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.4); }
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-gradient { 
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.glass-card {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #8B5CF6, #06B6D4, #F59E0B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #8B5CF6, #06B6D4);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  accent-color: #8B5CF6;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+}
