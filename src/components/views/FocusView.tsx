@@ -4,6 +4,14 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useAppStore } from "@/lib/store";
 
+const ambientSounds = {
+  rain: "/sounds/rain.mp3",
+  ocean: "/sounds/ocean.mp3",
+  fireplace: "/sounds/fireplace.mp3",
+  forest: "/sounds/forest.mp3",
+  cafe: "/sounds/cafe.mp3",
+};
+
 interface FocusViewProps {
   userId: string;
   onRefresh: () => void;
@@ -18,6 +26,40 @@ export default function FocusView({ userId, onRefresh }: FocusViewProps) {
   const [sessionsCompleted, setSessionsCompleted] = useState(0);
   const [totalFocusToday, setTotalFocusToday] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+const [selectedSound, setSelectedSound] = useState<string | null>(null);
+
+const playAmbientSound = (sound: keyof typeof ambientSounds) => {
+  if (audioRef.current) {
+    audioRef.current.pause();
+  }
+
+  const audio = new Audio(ambientSounds[sound]);
+  audio.loop = true;
+  audio.volume = 1;
+
+  audio
+    .play()
+    .then(() => {
+      audioRef.current = audio;
+      setSelectedSound(sound);
+    })
+    .catch((err) => console.log(err));
+};
+
+const stopAmbientSound = () => {
+  if (audioRef.current) {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+  }
+
+  audioRef.current = null;
+  setSelectedSound(null);
+};
+
+
 
   const saveFocusSession = useCallback(async (mins: number) => {
     await fetch("/api/focus", {
@@ -94,8 +136,8 @@ export default function FocusView({ userId, onRefresh }: FocusViewProps) {
 
   const durations = [15, 25, 30, 45, 60];
 
-  return (
-    <div className="p-4 md:p-6 max-w-3xl mx-auto space-y-6">
+ return (
+  <div className="p-4 md:p-6 max-w-3xl mx-auto space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold">🎧 Focus Mode</h2>
         <p className={`text-sm ${isDark ? "text-zinc-500" : "text-zinc-400"}`}>
@@ -225,8 +267,8 @@ export default function FocusView({ userId, onRefresh }: FocusViewProps) {
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-3">
+     {/* Stats */}
+<div className="grid grid-cols-3 gap-3">
         {[
           {
             label: "Sessions Today",
@@ -258,28 +300,48 @@ export default function FocusView({ userId, onRefresh }: FocusViewProps) {
               {stat.label}
             </div>
           </div>
-        ))}
+               ))}
       </div>
 
-      {/* Ambient sounds hint */}
+      {/* Ambient Sounds */}
       <div
         className={`p-4 rounded-2xl border text-center ${
-          isDark ? "bg-white/[0.02] border-white/5" : "bg-white border-zinc-100 shadow-sm"
+          isDark
+            ? "bg-white/[0.02] border-white/5"
+            : "bg-white border-zinc-100 shadow-sm"
         }`}
       >
+        <h3 className="font-semibold mb-4">🎵 Ambient Sounds</h3>
+
         <div className="flex items-center justify-center gap-4 flex-wrap">
-          {["🌧️ Rain", "🌊 Ocean", "🔥 Fireplace", "🌲 Forest", "☕ Café"].map((sound) => (
+          {[
+            { icon: "🌧️", label: "Rain", key: "rain" },
+            { icon: "🌊", label: "Ocean", key: "ocean" },
+            { icon: "🔥", label: "Fireplace", key: "fireplace" },
+            { icon: "🌲", label: "Forest", key: "forest" },
+            { icon: "☕", label: "Cafe", key: "cafe" },
+          ].map((sound) => (
             <button
-              key={sound}
-              className={`px-3 py-2 rounded-xl text-xs font-medium transition-all ${
-                isDark ? "bg-white/5 text-zinc-400 hover:bg-white/10" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
-              }`}
+              key={sound.key}
+              onClick={() =>
+                playAmbientSound(sound.key as keyof typeof ambientSounds)
+              }
+              className="px-3 py-2 rounded-xl text-xs font-medium"
             >
-              {sound}
+              {sound.icon} {sound.label}
             </button>
           ))}
         </div>
+        <button
+  onClick={stopAmbientSound}
+  className="px-4 py-2 rounded-xl bg-red-500 text-white text-xs font-medium mt-3"
+>
+  ⏹ Stop Sound
+</button>
       </div>
     </div>
   );
 }
+
+
+
