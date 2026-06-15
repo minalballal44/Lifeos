@@ -79,7 +79,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
   };
 
   return (
-    <div className="h-full w-full flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen w-full flex justify-center relative overflow-y-auto py-8">
       {/* Animated background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float" />
@@ -100,7 +100,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-6"
+            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -161,7 +161,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-6"
+            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8"
           >
             <h2 className="text-3xl font-bold text-center mb-2">
               Who are you, <span className="gradient-text">{name}</span>?
@@ -214,7 +214,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-6"
+            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8"
           >
             <h2 className="text-3xl font-bold text-center mb-2">
               What are your main goals?
