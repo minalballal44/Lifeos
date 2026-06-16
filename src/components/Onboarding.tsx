@@ -79,7 +79,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
   };
 
   return (
-    <div className="min-h-screen w-full flex justify-center relative overflow-y-auto py-8">
+    <div className="min-h-screen w-full flex justify-center relative overflow-y-auto overflow-x-hidden py-6 px-4">
       {/* Animated background */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float" />
@@ -100,7 +100,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8"
+            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8 pb-32"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -161,7 +161,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8"
+            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8 pb-32"
           >
             <h2 className="text-3xl font-bold text-center mb-2">
               Who are you, <span className="gradient-text">{name}</span>?
@@ -169,7 +169,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             <p className="text-zinc-400 text-center mb-8">
               This helps us personalize your experience
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {roles.map((r) => (
                 <motion.button
                   key={r.id}
@@ -182,13 +182,13 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
                       : "bg-white/5 border-white/10 hover:bg-white/10"
                   }`}
                 >
-                  <div className="text-2xl mb-2">{r.icon}</div>
+                 <div className="text-xl mb-1">{r.icon}</div>
                   <div className="font-medium text-sm">{r.label}</div>
-                  <div className="text-xs text-zinc-500">{r.desc}</div>
+                  <div className="hidden sm:block text-xs text-zinc-500">{r.desc}</div>
                 </motion.button>
               ))}
             </div>
-            <div className="flex gap-3 mt-6">
+            <div className="sticky bottom-4 flex gap-3 mt-6 z-20 backdrop-blur-md py-2">
               <button
                 onClick={() => setStep(0)}
                 className="px-6 py-4 rounded-2xl bg-white/5 text-white font-medium"
@@ -214,7 +214,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8"
+            className="relative z-10 text-center max-w-lg mx-auto px-4 py-4"
           >
             <h2 className="text-3xl font-bold text-center mb-2">
               What are your main goals?
@@ -222,14 +222,14 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             <p className="text-zinc-400 text-center mb-8">
               Select all that apply
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
               {goalOptions.map((g) => (
                 <motion.button
                   key={g.id}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => toggleGoal(g.id)}
-                  className={`p-4 rounded-2xl border text-left transition-all ${
+                  className={`p-3 rounded-2xl border text-left transition-all ${
                     selectedGoals.includes(g.id)
                       ? "bg-purple-500/20 border-purple-500/50 shadow-lg shadow-purple-500/10"
                       : "bg-white/5 border-white/10 hover:bg-white/10"
@@ -251,7 +251,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
               </motion.p>
             )}
 
-            <div className="flex gap-3 mt-6">
+            <div className="sticky bottom-4 flex gap-3 mt-6 bg-black/30 backdrop-blur-md p-2 rounded-2xl">
               <button
                 onClick={() => setStep(1)}
                 className="px-6 py-4 rounded-2xl bg-white/5 text-white font-medium"

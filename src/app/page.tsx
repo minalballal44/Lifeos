@@ -17,7 +17,7 @@ export default function Home() {
 
   if (!mounted) {
     return (
-      <div className="h-screen w-screen bg-[#0F0F14] flex items-center justify-center">
+      <div className="min-h-screen w-full bg-[#0F0F14] flex items-center justify-center">
         <div className="text-center">
           <div className="text-5xl mb-4">∞</div>
           <div className="text-2xl font-bold gradient-text mb-2">LifeOS</div>
@@ -45,7 +45,7 @@ export default function Home() {
   // Auth screens
   return (
     <div
-      className={`h-screen w-screen transition-colors duration-300 ${
+  className={`min-h-screen w-full transition-colors duration-300 ${
         isDark ? "bg-[#0F0F14] text-zinc-100" : "bg-[#FAFBFC] text-zinc-900"
       }`}
     >
