@@ -100,7 +100,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-6 py-8 pb-32"
+            className="relative z-10 text-center max-w-lg mx-auto px-4 py-6"
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -188,7 +188,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
                 </motion.button>
               ))}
             </div>
-            <div className="sticky bottom-4 flex gap-3 mt-6 z-20 backdrop-blur-md py-2">
+            <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setStep(0)}
                 className="px-6 py-4 rounded-2xl bg-white/5 text-white font-medium"
@@ -214,7 +214,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="relative z-10 text-center max-w-lg mx-auto px-4 py-4"
+            className="relative z-10 text-center max-w-lg mx-auto px-4 py-6 pb-24"
           >
             <h2 className="text-3xl font-bold text-center mb-2">
               What are your main goals?
@@ -251,7 +251,7 @@ export default function Onboarding({ onSwitchToLogin }: OnboardingProps) {
               </motion.p>
             )}
 
-            <div className="sticky bottom-4 flex gap-3 mt-6 bg-black/30 backdrop-blur-md p-2 rounded-2xl">
+            <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setStep(1)}
                 className="px-6 py-4 rounded-2xl bg-white/5 text-white font-medium"
